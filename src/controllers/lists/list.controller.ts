@@ -51,7 +51,7 @@ class ListController {
       const { id } = req.params;
 
       const {status, message} = await ListService.deleteList(id)
-      return response({res, code:200, status, message});
+      return response({res, code: status==='failure' ? 404 : 200, status, message});
     } catch (error) {
       throw error;
     }
@@ -76,7 +76,7 @@ class ListController {
         listId
       } = req.params;
       const {status, message, payload} = await ItemServices.getAllItems(listId);
-      return response({res, code:200, status, message, payload: {count: payload.rowCount, lists:payload.rows}});
+      return response({res, code:200, status, message, payload: {count: payload.rowCount, items:payload.rows}});
 
     } catch (error) {
       throw error;

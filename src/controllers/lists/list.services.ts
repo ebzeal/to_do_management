@@ -21,6 +21,10 @@ class ListService{
     }
 
   static async deleteList(id: string): Promise<ServiceResponseInterface> {
+    const {payload} = await this.getList(id);
+    if(payload.rowCount === 0) {
+    return {status: 'failure', message: 'item does not exist'}
+    }
       await query(deleteAList, [id]);
       return {status:'success', message:'List has been deleted'}
     }
