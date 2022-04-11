@@ -1,18 +1,14 @@
-[![Build Status](https://travis-ci.org/ebzeal/mock-PL.svg?branch=master)](https://travis-ci.org/ebzeal/mock-PL)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c956f510904737108f4d/maintainability)](https://codeclimate.com/github/ebzeal/mock-PL/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/c956f510904737108f4d/test_coverage)](https://codeclimate.com/github/ebzeal/mock-PL/test_coverage)
+# ToDo_management
 
-# mock-PL-backend
-
-An API that serves the latest scores of fixtures of matches in a “Mock Premier League”
+An API that helps manage todo lists and items.
 
 # Documentation
 
-https://documenter.getpostman.com/view/6838819/SVtWwSJv
+https://documenter.getpostman.com/view/6838819/UVyysXhS
 
 # Prerequisites
 
-A functional computer
+Node > v12.14
 
 # Installing
 
@@ -22,27 +18,29 @@ Say what the step will be
 
 > Git clone the master branch
 
-> run yarn or npm install
+> npm install
 
-> run yarn build
+> npm run dev
 
 # Running the tests
 
 To run unit tests
 
-> yarn test
+> npm run test
+For test coverage
+> npm run coverage
 
 These tests ensure that no functionality is broken
 
 # Built With
 
-NodeJs (JavaScript or TypeScript)
+NodeJs 
+ExpressJs
+TypeScript
 MongoDB
-Redis
-Docker
+PostgreSQL
+Mocha
 POSTMAN
-Jest
-Express
 
 # Contributing
 
