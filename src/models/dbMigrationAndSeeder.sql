@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS list, item;
-CREATE EXTENSION "uuid-ossp";
 
    CREATE TABLE IF NOT EXISTS
         list(

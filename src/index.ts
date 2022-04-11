@@ -17,3 +17,5 @@ if (process.env.NODE_ENV !== 'test') {
     console.log(`Server started on port ${port}`);
   });
 }
+
+export default app;
