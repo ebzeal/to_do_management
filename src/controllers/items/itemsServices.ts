@@ -1,0 +1,44 @@
+import { addItem, selectItem, deleteItem, updateItem, updateItemWithMultipleParams, selectItemsFromList, selectItemFromList, } from '../../models/sqlQueries';
+import query from '../../config/psql_dbConnection'
+import { ServiceResponseInterface, ItemServiceResponseInterface } from '../../utils/types';
+
+
+class ItemServices {
+  static async createItem(description: string, list_id: string):Promise<ServiceResponseInterface> {
+
+    const { rows } = await query(selectItem, [description, list_id]);
+    if (rows[0]) return {status:'failure', message:'This item already exists'};
+    await query(addItem, [description, list_id]);
+    return {status: 'success', message: 'New Item has been added to List successfully'}
+  }
+  
+  static async getAllItems(listId: string):Promise<ItemServiceResponseInterface> {
+    const {rows, rowCount} = await query(selectItemsFromList, [listId]);
+    return {status: 'success', message:rowCount === 0  ? `No items from list ${listId}` :`All items from list ${listId}`, payload:{rows, rowCount}}
+  }
+
+  static async getAnItem( itemId: string, listId: string):Promise<ItemServiceResponseInterface> {
+    const {rows, rowCount} = await query(selectItemFromList, [itemId, listId]);
+    return {status: 'success', message: rowCount === 0  ? 'This item does not exist' :`All items from list ${listId}`, payload:{rows, rowCount}}
+  }
+
+  static async deleteItem( id: string):Promise<ServiceResponseInterface> {
+    await query(deleteItem, [id]);
+    return {status: 'success', message: 'item has been deleted from List'}
+  }
+
+  static async updateItem( id:string, description: string, checked: boolean):Promise<ServiceResponseInterface> {
+    const checkedVal = checked ? 'true' : 'false';
+    if(description && checked !== undefined) {
+      await query(updateItemWithMultipleParams('description' , 'checked'), [id, description, checkedVal])
+    } else{
+      const param = description ? description : checkedVal;
+      const paramVal = description ? 'description' : 'checked';
+      await query(updateItem(paramVal), [id, param]);
+    }
+    return {status: 'success', message: 'item has been deleted from List'}
+  }
+
+}
+
+export default ItemServices
