@@ -19,7 +19,7 @@ class ItemServices {
 
   static async getAnItem( itemId: string, listId: string):Promise<ItemServiceResponseInterface> {
     const {rows, rowCount} = await query(selectItemFromList, [itemId, listId]);
-    return {status: 'success', message: rowCount === 0  ? 'This item does not exist' :`All items from list ${listId}`, payload:{rows, rowCount}}
+    return {status: 'success', message: rowCount === 0  ? 'This item does not exist' :`Item retrieved from list ${listId}`, payload:{rows, rowCount}}
   }
 
   static async getAnItemById( itemId: string):Promise<ItemServiceResponseInterface> {
@@ -45,7 +45,7 @@ class ItemServices {
       const paramVal = description ? 'description' : 'checked';
       await query(updateItem(paramVal), [id, param]);
     }
-    return {status: 'success', message: 'item has been updated from List'}
+    return {status: 'success', message: 'item has been updated in List'}
   }
 
 }

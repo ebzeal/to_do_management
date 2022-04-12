@@ -7,7 +7,7 @@ class ListService{
     const { rows } = await query(selectAListByParam('name'), [name]);
       if (rows[0]) return {status:'failure', message:'This list already exists'};
       await query(addList, [name]); 
-      return {status: 'success', message: 'New Item has been added to List successfully'}
+      return {status: 'success', message: 'New List has been added successfully'}
     }
 
   static async getLists(): Promise<ListServiceResponseInterface> {
@@ -23,7 +23,7 @@ class ListService{
   static async deleteList(id: string): Promise<ServiceResponseInterface> {
     const {payload} = await this.getList(id);
     if(payload.rowCount === 0) {
-    return {status: 'failure', message: 'item does not exist'}
+    return {status: 'failure', message: 'list does not exist'}
     }
       await query(deleteAList, [id]);
       return {status:'success', message:'List has been deleted'}
