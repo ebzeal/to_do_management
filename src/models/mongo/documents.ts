@@ -5,10 +5,9 @@ export interface List {
   name: string;
 }
 
-
 export interface Item {
   id?: ObjectId;
   description: string;
   checked: boolean;
-  list_id: ObjectId
+  list_id: ObjectId;
 }

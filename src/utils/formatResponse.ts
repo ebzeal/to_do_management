@@ -1,5 +1,5 @@
-import { ResponseInterfaceDto } from './types';
-import { Response } from 'express';
+import { ResponseInterfaceDto } from "./types";
+import { Response } from "express";
 /**
  *
  * @description Method to send response in a generic format.
@@ -12,9 +12,9 @@ import { Response } from 'express';
  * @returns {object} Json response
  */
 
- export default (resDto:ResponseInterfaceDto): Response => {
-   const {res, code, status, message, error, payload} = resDto
-   return res.status(code).json({
+export default (resDto: ResponseInterfaceDto): Response => {
+  const { res, code, status, message, error, payload } = resDto;
+  return res.status(code).json({
     status,
     data: {
       statusCode: code,

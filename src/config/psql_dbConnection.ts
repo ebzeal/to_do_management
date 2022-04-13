@@ -1,19 +1,19 @@
 /* eslint-disable no-console */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import { Pool } from 'pg';
-import env from 'dotenv';
+import { Pool } from "pg";
+import env from "dotenv";
 
 env.config();
 
 const connectionEnv = () =>
-process.env.NODE_ENV === 'test' ? process.env.DATABASE_URL_TEST : process.env.DATABASE_URL;
+  process.env.NODE_ENV === "test" ? process.env.DATABASE_URL_TEST : process.env.DATABASE_URL;
 
 const pool = new Pool({
   connectionString: connectionEnv(),
 });
-pool.on('connect', () => {
-  console.log('Connected to DB');
+pool.on("connect", () => {
+  console.log("Connected to DB");
 });
 
 /**
@@ -23,7 +23,7 @@ pool.on('connect', () => {
  * @returns {object} object
  */
 
-const query = async (text: string, params?:string[]):Promise<any> => {
+const query = async (text: string, params?: string[]): Promise<any> => {
   try {
     const res = await pool.query(text, params);
     return res;

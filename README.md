@@ -20,34 +20,36 @@ Say what the step will be
 
 > npm install
 
-> npm run db-config (run this only if you want to use postgresql) 
+> npm run db-config (run this only if you want to use postgresql)
 
 > npm run dev
 
 # Database
+
 This app makes use of both PostgreSQL and MongoDb with no ORMs or ODMs.
 
 - To use postgresql Database
- > - npm run db-config (sets up db and seed data)  
- > - npm run dev
+
+  > - npm run db-config (sets up db and seed data)
+  > - npm run dev
 
 - To use mongodb Database
- > npm run dev-mongo
-
+  > npm run dev-mongo
 
 # Running the tests
 
 To run unit tests
 
 > npm run test
- - For test coverage
-> npm run coverage
+
+- For test coverage
+  > npm run coverage
 
 These tests ensure that no functionality is broken
 
 # Built With
 
-NodeJs 
+NodeJs
 ExpressJs
 TypeScript
 MongoDB
