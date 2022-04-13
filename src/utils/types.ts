@@ -6,26 +6,26 @@ import { Response } from 'express';
 interface rowList {
   id: number;
   name: string;
-  datecreated:Date;
-  datemodified:Date;
+  datecreated?:Date;
+  datemodified?:Date;
 }
 interface rowItem {
   id: number;
   description:string;
   checked: boolean;
   list_id: number;
-  datecreated:string;
-  datemodified:string;
+  datecreated?:string;
+  datemodified?:string;
 }
 
 
 interface ListPayload {
-  rowCount: number;
+  rowCount?: number;
   rows: rowList[]
 }
 
 interface ItemPayload {
-rowCount: number;
+rowCount?: number;
 rows: rowItem[]
 }
 interface ReturnedData {
@@ -47,6 +47,7 @@ export interface ResponseInterfaceDto {
 export interface ServiceResponseInterface {
   status: string; 
   message: string; 
+  code?: number
 }
 
 export interface ListServiceResponseInterface extends ServiceResponseInterface {

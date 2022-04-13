@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": " TODO List management service",
   "scripts": {
-    "dev": "nodemon src/index.ts --env",
+    "dev": "env DB_TYPE=pg nodemon src/index.ts --env",
+    "dev-mongo": "env DB_TYPE=mongo nodemon src/index.ts --env",
     "test": "npm run test-db-config && env TS_NODE_PROJECT=\"tsconfig.json\" NODE_ENV=test mocha -r ts-node/register ./src/tests/**/*.ts --timeout=20000 --recursive",
     "test-watch": "npm run test --watch --watch-files src/tests/**/*",
-    "db-config": "./src/models/configure.sh",
-    "test-db-config": "./src/models/configureTest.sh",
+    "db-config": "./src/models/postgres/configure.sh",
+    "test-db-config": "./src/models/postgres/configureTest.sh",
     "coverage": "nyc npm run test"
   },
   "repository": {
@@ -51,6 +52,7 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongodb": "^4.5.0",
     "mongoose": "^6.2.10",
     "pg": "^8.7.3"
   },

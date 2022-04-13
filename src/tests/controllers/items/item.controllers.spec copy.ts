@@ -2,7 +2,7 @@ import { ServiceResponseInterface } from '../../../utils/types';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import sinon from 'sinon';
-import ItemServices from '../../../controllers/items/itemsServices';
+import ItemServices from '../../../controllers/items/items.services';
 import app from '../../../index';
 import ItemController from '../../../controllers/items/item.controller';
 import { singleList, stubList, stubListResponse } from '../../mockfiles';

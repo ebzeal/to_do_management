@@ -2,7 +2,7 @@ import { ServiceResponseInterface } from './../../../utils/types';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import sinon from 'sinon';
-import ItemServices from '../../../controllers/items/itemsServices';
+import ItemServices from '../../../controllers/items/items.services';
 import app from '../../../index';
 import ListService from '../../../controllers/lists/list.services';
 import ListController from '../../../controllers/lists/list.controller';
@@ -33,7 +33,7 @@ describe('createList', ()=>{
     .post('/api/v1/list')
     .send(stubList);
 
-    expect(response.status).to.eqls(201);
+    expect(response.status).to.eqls(409);
     expect(response.body.status).to.eqls('failure');
     expect(response.body.data.message).to.eqls('This list already exists');
   })

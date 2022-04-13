@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import response from '../../utils/formatResponse';
-import ItemServices from './itemsServices';
+import ItemServicespg from './items.services';
+import ItemServicesMongo from './items.services.mongo';
+
+
+const ItemServices = process.env.DB_TYPE === 'mongo' ? ItemServicesMongo : ItemServicespg;
 
 /**
  * @class ItemController
@@ -13,8 +17,8 @@ class ItemController {
         list_id
       } = req.body;
 
-      const{status, message} =  await ItemServices.createItem(description, list_id)
-      return response({res, code:201, status, message});
+      const{status, message, code} =  await ItemServices.createItem(description, list_id)
+      return response({res, code: code || 201, status, message});
     } catch (error) {
       throw error;
     }
@@ -23,8 +27,8 @@ class ItemController {
   static async deleteItemFromList(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const{status, message} =  await ItemServices.deleteItem(id)
-      return response({res, code:200, status, message});
+      const{status, message, code} =  await ItemServices.deleteItem(id)
+      return response({res, code: code || 200, status, message});
     } catch (error) {
       throw error;
     }

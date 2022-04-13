@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
-import query from '../../config/psql_dbConnection'
 import response from '../../utils/formatResponse';
-import { addList, selectAListByParam, deleteAList, updateAList, selectAllLists } from '../../models/sqlQueries';
-import ListService from './list.services';
-import ItemServices from '../items/itemsServices';
+import ListServicepg from './list.services';
+import ListServiceMongo from './list.services.mongo';
+import ItemServicespg from '../items/items.services';
+import ItemServicesMongo from '../items/items.services.mongo';
+
+const ListService = process.env.DB_TYPE === 'mongo' ? ListServiceMongo : ListServicepg;
+const ItemServices = process.env.DB_TYPE === 'mongo' ? ItemServicesMongo : ItemServicespg;
 
 /**
  * @class ListController
@@ -17,8 +20,8 @@ class ListController {
         name,
       } = req.body;
 
-      const { status, message } = await ListService.createList(name);
-      return response({res, code:201, status, message});
+      const { status, message, code } = await ListService.createList(name);
+      return response({res, code: code || 201, status, message});
     } catch (error) {
       throw error;
     }
@@ -37,8 +40,8 @@ class ListController {
   static async getAList(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const {status, message, payload} = await ListService.getList(id);
-      return response({res, code:200, status, message, payload: payload.rows});
+      const {status, message, payload, code} = await ListService.getList(id);
+      return response({res, code:code||200, status, message, payload: payload.rows});
 
     } catch (error) {
       throw error;
@@ -50,8 +53,8 @@ class ListController {
     try {
       const { id } = req.params;
 
-      const {status, message} = await ListService.deleteList(id)
-      return response({res, code: status==='failure' ? 404 : 200, status, message});
+      const {status, message, code} = await ListService.deleteList(id)
+      return response({res, code: code||200, status, message});
     } catch (error) {
       throw error;
     }

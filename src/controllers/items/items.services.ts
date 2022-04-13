@@ -1,4 +1,4 @@
-import { addItem, selectItem, deleteItem, updateItem, updateItemWithMultipleParams, selectItemsFromList, selectItemFromList, selectItemById } from '../../models/sqlQueries';
+import { addItem, selectItem, deleteItem, updateItem, updateItemWithMultipleParams, selectItemsFromList, selectItemFromList, selectItemById } from '../../models/postgres/sqlQueries';
 import query from '../../config/psql_dbConnection'
 import { ServiceResponseInterface, ItemServiceResponseInterface } from '../../utils/types';
 
@@ -7,7 +7,7 @@ class ItemServices {
   static async createItem(description: string, list_id: string):Promise<ServiceResponseInterface> {
 
     const { rows } = await query(selectItem, [description, list_id]);
-    if (rows[0]) return {status:'failure', message:'This item already exists'};
+    if (rows[0]) return {status:'failure', message:'This item already exists', code:409};
     await query(addItem, [description, list_id]);
     return {status: 'success', message: 'New Item has been added to List successfully'}
   }
