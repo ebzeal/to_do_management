@@ -10,7 +10,8 @@
     "db-config": "./src/models/postgres/configure.sh",
     "test-db-config": "./src/models/postgres/configureTest.sh",
     "coverage": "nyc npm run test",
-    "format": "prettier . --write"
+    "lint": "eslint ./src/**/*.ts",
+    "format": "eslint ./src/**/*.ts --fix"
   },
   "repository": {
     "type": "git",

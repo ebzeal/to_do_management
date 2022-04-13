@@ -25,13 +25,3 @@ export const singleList = {
     ],
   },
 };
-
-const stubServiceResponse = {
-  status: "success",
-  message: "New List has been added successfully",
-} as any;
-
-const stubFailedServiceResponse = {
-  status: "failure",
-  message: "This list already exists",
-} as any;

@@ -24,12 +24,6 @@ interface ItemPayload {
   rowCount?: number;
   rows: rowItem[];
 }
-interface ReturnedData {
-  statusCode: number;
-  message: string;
-  error?: unknown;
-  payload?: ListPayload | ItemPayload;
-}
 
 export interface ResponseInterfaceDto {
   res: Response;

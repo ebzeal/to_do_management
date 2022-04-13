@@ -1,10 +1,10 @@
-import { MongoClient, Db, Collection } from "mongodb";
+import { MongoClient, Collection } from "mongodb";
 import env from "dotenv";
 import { List, Item } from "../models/mongo/documents";
 
 env.config();
 
-let url = process.env.MONGO_DB_URL;
+const url = process.env.MONGO_DB_URL;
 
 export const collections: { list?: Collection<List>; item?: Collection<Item> } = {};
 
